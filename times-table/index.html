@@ -726,7 +726,7 @@
       distractors=generateDistractors(correctVal,numDistractors,cfg.difficulty,q.a);
     }
 
-    const opts=shuffle([correctVal,...distractors]);
+    const opts=cfg.difficulty==='extra'?shuffle([correctVal,...distractors]):[correctVal,...distractors].sort((a,b)=>a-b);
     const grid=$('answersGrid');
     grid.innerHTML='';
     opts.forEach((val,idx)=>{
