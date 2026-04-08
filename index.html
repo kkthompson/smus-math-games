@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smus Math Games</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #1a1a2e;
+    --bg-card: #16213e;
+    --gold: #ffd32a;
+    --text: #f5f6fa;
+    --text-dim: #a4b0be;
+    --font: 'Nunito', sans-serif;
+    --green: #0be881;
+    --purple: #a55eea;
+  }
+
+  html, body {
+    min-height: 100%;
+    font-family: var(--font);
+    font-weight: 800;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 32px 24px;
+    gap: 32px;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(11,232,129,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 80%, rgba(165,94,234,0.07) 0%, transparent 55%),
+      var(--bg);
+  }
+
+  .header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .greeting {
+    font-size: clamp(0.9rem, 2.8vw, 1.1rem);
+    font-weight: 900;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(255,211,42,0.35);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .title {
+    font-size: clamp(2rem, 7vw, 3.6rem);
+    font-weight: 900;
+    line-height: 1.05;
+  }
+
+  .title .highlight-green { color: var(--green); }
+  .title .highlight-purple { color: var(--purple); }
+
+  .subtitle {
+    font-size: clamp(0.75rem, 2.2vw, 0.9rem);
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 2px;
+  }
+
+  .games {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    max-width: 680px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .game-card {
+    flex: 1 1 280px;
+    max-width: 320px;
+    background: var(--bg-card);
+    border-radius: 24px;
+    padding: 28px 24px 24px;
+    border: 2px solid rgba(255,255,255,0.07);
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    cursor: pointer;
+  }
+
+  .game-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .game-card.green {
+    border-color: rgba(11,232,129,0.2);
+    box-shadow: 0 0 0 0 rgba(11,232,129,0);
+  }
+  .game-card.green:hover {
+    border-color: rgba(11,232,129,0.5);
+    box-shadow: 0 8px 40px rgba(11,232,129,0.15);
+  }
+
+  .game-card.purple {
+    border-color: rgba(165,94,234,0.2);
+    box-shadow: 0 0 0 0 rgba(165,94,234,0);
+  }
+  .game-card.purple:hover {
+    border-color: rgba(165,94,234,0.5);
+    box-shadow: 0 8px 40px rgba(165,94,234,0.18);
+  }
+
+  .game-card:active { transform: scale(0.97); }
+
+  .card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-icon.green { background: rgba(11,232,129,0.12); }
+  .card-icon.purple { background: rgba(165,94,234,0.12); }
+
+  .card-icon svg { display: block; }
+
+  .card-name {
+    font-size: clamp(1.25rem, 4vw, 1.6rem);
+    font-weight: 900;
+    line-height: 1.1;
+  }
+
+  .card-name .accent-green { color: var(--green); }
+  .card-name .accent-purple { color: var(--purple); }
+
+  .card-desc {
+    font-size: clamp(0.8rem, 2.4vw, 0.9rem);
+    color: var(--text-dim);
+    font-weight: 800;
+    line-height: 1.4;
+  }
+
+  .card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: clamp(0.8rem, 2.2vw, 0.875rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 4px;
+  }
+
+  .card-cta.green { color: var(--green); }
+  .card-cta.purple { color: var(--purple); }
+
+  .card-cta svg { transition: transform 0.15s; }
+  .game-card:hover .card-cta svg { transform: translateX(4px); }
+
+  .footer {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    opacity: 0.5;
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="greeting">Pick a game!</div>
+  <div class="title">
+    <span class="highlight-green">SMUS</span> <span class="highlight-purple">Math</span> Games
+  </div>
+  <div class="subtitle">Test your skills against the clock</div>
+</header>
+
+<div class="games">
+
+  <a class="game-card green" href="times-table/">
+    <div class="card-icon green">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 8L24 24M24 8L8 24" stroke="#0be881" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="card-name">Times Table <span class="accent-green">Blitz!</span></div>
+    <div class="card-desc">How fast can you go? Multiply your way through 10 questions and race the clock.</div>
+    <div class="card-cta green">
+      Play now
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="#0be881" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </a>
+
+  <a class="game-card purple" href="division/">
+    <div class="card-icon purple">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="6" y1="16" x2="26" y2="16" stroke="#a55eea" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="16" cy="8" r="3" fill="#a55eea"/>
+        <circle cx="16" cy="24" r="3" fill="#a55eea"/>
+      </svg>
+    </div>
+    <div class="card-name">Divide <span class="accent-purple">&amp; Conquer!</span></div>
+    <div class="card-desc">Split numbers at speed! Test your division skills across multiple difficulties.</div>
+    <div class="card-cta purple">
+      Play now
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="#a55eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </a>
+
+</div>
+
+<footer class="footer">More games coming soon</footer>
+
+</body>
+</html>
