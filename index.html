@@ -9,14 +9,22 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #1a1a2e;
-    --bg-card: #16213e;
-    --gold: #ffd32a;
-    --text: #f5f6fa;
-    --text-dim: #a4b0be;
+    --bg: oklch(14.2% 0.034 265.8);
+    --bg-card: oklch(15% 0.051 248.6);
+    --gold: oklch(88.2% 0.186 87.9);
+    --text: oklch(97% 0.006 254.7);
+    --text-dim: oklch(71.9% 0.022 247.7);
     --font: 'Nunito', sans-serif;
-    --green: #0be881;
-    --purple: #a55eea;
+    --green: oklch(84.2% 0.268 155.9);
+    --purple: oklch(62% 0.218 295.3);
+  }
+
+  @media (color-gamut: p3) {
+    :root {
+      --gold: oklch(90% 0.22 87.9);
+      --green: oklch(87% 0.33 155.9);
+      --purple: oklch(65% 0.27 295.3);
+    }
   }
 
   html, body {
@@ -39,8 +47,8 @@
     padding: 32px 24px;
     gap: 32px;
     background:
-      radial-gradient(ellipse at 20% 20%, rgba(11,232,129,0.07) 0%, transparent 55%),
-      radial-gradient(ellipse at 80% 80%, rgba(165,94,234,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse at 20% 20%, oklch(84.2% 0.268 155.9 / 0.07) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 80%, oklch(62% 0.218 295.3 / 0.07) 0%, transparent 55%),
       var(--bg);
   }
 
@@ -56,7 +64,7 @@
     font-size: clamp(0.9rem, 2.8vw, 1.1rem);
     font-weight: 900;
     color: var(--gold);
-    text-shadow: 0 0 20px rgba(255,211,42,0.35);
+    text-shadow: 0 0 20px oklch(88.2% 0.186 87.9 / 0.35);
     text-transform: uppercase;
     letter-spacing: 2px;
   }
@@ -94,7 +102,7 @@
     background: var(--bg-card);
     border-radius: 24px;
     padding: 28px 24px 24px;
-    border: 2px solid rgba(255,255,255,0.07);
+    border: 2px solid oklch(100% 0 0 / 0.07);
     text-decoration: none;
     color: var(--text);
     display: flex;
@@ -109,21 +117,21 @@
   }
 
   .game-card.green {
-    border-color: rgba(11,232,129,0.2);
-    box-shadow: 0 0 0 0 rgba(11,232,129,0);
+    border-color: oklch(84.2% 0.268 155.9 / 0.2);
+    box-shadow: 0 0 0 0 oklch(84.2% 0.268 155.9 / 0);
   }
   .game-card.green:hover {
-    border-color: rgba(11,232,129,0.5);
-    box-shadow: 0 8px 40px rgba(11,232,129,0.15);
+    border-color: oklch(84.2% 0.268 155.9 / 0.5);
+    box-shadow: 0 8px 40px oklch(84.2% 0.268 155.9 / 0.15);
   }
 
   .game-card.purple {
-    border-color: rgba(165,94,234,0.2);
-    box-shadow: 0 0 0 0 rgba(165,94,234,0);
+    border-color: oklch(62% 0.218 295.3 / 0.2);
+    box-shadow: 0 0 0 0 oklch(62% 0.218 295.3 / 0);
   }
   .game-card.purple:hover {
-    border-color: rgba(165,94,234,0.5);
-    box-shadow: 0 8px 40px rgba(165,94,234,0.18);
+    border-color: oklch(62% 0.218 295.3 / 0.5);
+    box-shadow: 0 8px 40px oklch(62% 0.218 295.3 / 0.18);
   }
 
   .game-card:active { transform: scale(0.97); }
@@ -137,10 +145,13 @@
     justify-content: center;
   }
 
-  .card-icon.green { background: rgba(11,232,129,0.12); }
-  .card-icon.purple { background: rgba(165,94,234,0.12); }
+  .card-icon.green { background: oklch(84.2% 0.268 155.9 / 0.12); }
+  .card-icon.purple { background: oklch(62% 0.218 295.3 / 0.12); }
 
   .card-icon svg { display: block; }
+  .card-icon.green svg path, .card-cta.green svg path { stroke: var(--green); }
+  .card-icon.purple svg line, .card-cta.purple svg path { stroke: var(--purple); }
+  .card-icon.purple svg circle { fill: var(--purple); }
 
   .card-name {
     font-size: clamp(1.25rem, 4vw, 1.6rem);
@@ -201,7 +212,7 @@
   <a class="game-card green" href="times-table/">
     <div class="card-icon green">
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 8L24 24M24 8L8 24" stroke="#0be881" stroke-width="4" stroke-linecap="round"/>
+        <path d="M8 8L24 24M24 8L8 24" stroke-width="4" stroke-linecap="round"/>
       </svg>
     </div>
     <div class="card-name">Times Table <span class="accent-green">Blitz!</span></div>
@@ -209,7 +220,7 @@
     <div class="card-cta green">
       Play now
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M3 8h10M9 4l4 4-4 4" stroke="#0be881" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3 8h10M9 4l4 4-4 4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
   </a>
@@ -217,9 +228,9 @@
   <a class="game-card purple" href="division/">
     <div class="card-icon purple">
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="6" y1="16" x2="26" y2="16" stroke="#a55eea" stroke-width="4" stroke-linecap="round"/>
-        <circle cx="16" cy="8" r="3" fill="#a55eea"/>
-        <circle cx="16" cy="24" r="3" fill="#a55eea"/>
+        <line x1="6" y1="16" x2="26" y2="16" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="16" cy="8" r="3"/>
+        <circle cx="16" cy="24" r="3"/>
       </svg>
     </div>
     <div class="card-name">Divide <span class="accent-purple">&amp; Conquer!</span></div>
@@ -227,7 +238,7 @@
     <div class="card-cta purple">
       Play now
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M3 8h10M9 4l4 4-4 4" stroke="#a55eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3 8h10M9 4l4 4-4 4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
   </a>
